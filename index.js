@@ -3,9 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailField = document.getElementById("Email-input");
   const passwordField = document.getElementById("password-input");
   const errorMsg = document.getElementById("error-msg");
-  const loginBtn = document.getElementById("login-btn");
+  const signUpForm = document.getElementById("signUp");
+  const confrimPasswordField = document.getElementById("confirm-password-input");
 
-  loginForm.addEventListener("submit", function (e) {
+// if(loginForm) before the event listener 
+// prevents "Cannot read properties of null" errors when using the same script on multiple pages.
+  if(loginForm){
+  loginForm.addEventListener("submit",(e) => {
     e.preventDefault();
     errorMsg.textContent = "";
     errorMsg.classList.add("hidden");
@@ -25,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // console.log(email, password)
     // console.log(user)
   });
+}
 
   function login(user) {
     const storedUser = JSON.parse(localStorage.getItem("helloDayUser"));
@@ -49,4 +54,37 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
   }
+  
+  function signUp() {
+    const newEmail = emailField.value.trim();
+    const newPassword = passwordField.value.trim();
+    const confirmPassword = confrimPasswordField.value.trim();
+
+    errorMsg.textContent = "";
+    errorMsg.classList.add("hidden");
+
+    if (newEmail === "" || newPassword === "" || confirmPassword === "") {
+      errorMsg.textContent = "Please fill all fields.";
+      errorMsg.classList.remove("hidden");
+      errorMsg.style.color = "red";
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      errorMsg.textContent = "passwords do not match";
+      errorMsg.classList.remove("hidden");
+      errorMsg.style.color = "red";
+      return;
+    }
+
+    const newUser = { email: newEmail, password: newPassword };
+    localStorage.setItem("helloDayUser", JSON.stringify(newUser));
+  }
+    
+  
+  signUpForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    signUp();
+  });
+
 });
