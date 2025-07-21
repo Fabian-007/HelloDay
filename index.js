@@ -32,27 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
   function login(user) {
-    const storedUser = JSON.parse(localStorage.getItem("helloDayUser"));
+    const storedUsers = JSON.parse(localStorage.getItem("helloDayUsers"))
+    const validUser = storedUsers.find(u => u.email === user.email && u.password === user.password)
     // console.log(typeof storedUser)
     // console.log(storedUser)
 
-    if (!storedUser) {
-      errorMsg.textContent = "No user found. Please sign up first";
+     if(!validUser){
+      errorMsg.textContent = "invalid email or password"
       errorMsg.classList.remove("hidden");
       errorMsg.style.color = "red";
       return;
-    } else if (
-      user.email === storedUser.email &&
-      user.password === storedUser.password
-    ) {
+     }
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("helloDayUser", JSON.stringify(validUser))
       window.location.href = "weather.html";
-    } else {
-      errorMsg.textContent = "invalid email or password";
-      errorMsg.classList.remove("hidden");
-      errorMsg.style.color = "red";
-      return;
-    }
   }
   
   function signUp() {
@@ -78,13 +71,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const newUser = { email: newEmail, password: newPassword };
+    const storedUsers = JSON.parse(localStorage.getItem("helloDayUsers")) || []
+    const userExist = storedUsers.some(user => user.email === newEmail)
+    if(userExist){
+      errorMsg.textContent = "User already exist please, log in"
+      errorMsg.classList.remove("hidden")
+      errorMsg.style.color = "red"
+      return
+    }
+
+    storedUsers.push(newUser)
+    localStorage.setItem("helloDayUsers", JSON.stringify(storedUsers));
     localStorage.setItem("helloDayUser", JSON.stringify(newUser));
+    window.location.href = "index.html"
   }
     
-  
-  signUpForm.addEventListener("submit", (e) => {
+  if(signUpForm){
+    signUpForm.addEventListener("submit", (e) => {
     e.preventDefault();
     signUp();
   });
+}
 
 });
