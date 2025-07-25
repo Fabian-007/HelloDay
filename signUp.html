@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup Helloday</title>
+    <link href="./style.css" rel="stylesheet" />
+</head>
+<body class="h-screen p-0 m-0 box-border text-md">
+    <header class="p-4 text-2xl font-bold  bg-purple-600 text-white shadow-md">
+      <a href="index.html" class="relative text-white hover:text-white
+  after:block after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-white
+  after:w-0 after:transition-all after:duration-300 hover:after:w-full">HelloDay</a>
+    </header>
+
+    <main class="h-screen flex justify-center items-center">
+      <section
+        id="login"
+        class="bg-gray-800 text-white w-full max-w-[350px] mx-auto p-[20px] rounded-md"
+      >
+        <h1 class="text-center text-3xl mb-6 mt-6 font-bold">Register</h1>
+
+        <form class="flex flex-col items-start" id="signUp">
+          <section class="w-full mb-6">
+            <label for="Email-input" class="block mb-1"></label>
+            <input
+              type="email"
+              id="Email-input"
+              name="email"
+              placeholder="Enter email"
+              class="w-[95%] m-1 p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none rounded-sm"
+              autocomplete="email"
+            />
+          </section>
+
+          <section class="w-full mb-[20px]">
+            <label for="password-input" class="block mb-1"></label>
+            <input
+              type="password"
+              id="password-input"
+              name="password"
+              placeholder="Enter password"
+              class="w-[95%] m-1 p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none rounded-sm"
+              autocomplete="current-password"
+            />
+          </section>
+
+          <section class="w-full mb-[20px]">
+            <label for="password-input2" class="block mb-1"></label>
+            <input
+              type="password"
+              id="confirm-password-input"
+              name="password"
+              placeholder="confirm password"
+              class="w-[95%] m-1 p-3 focus:ring-2 focus:ring-purple-600 focus:outline-none rounded-sm"
+              autocomplete="current-password"
+            />
+            <p id="error-msg" class="text-red-600 text-sm mt-1 hidden"></p>
+          </section>
+
+          <section class="text-center w-full mb-6">
+            <button
+              type="submit"
+              id="login-btn"
+              class="bg-purple-600 w-[95%] p-3 rounded-md hover:bg-purple-800 transition cursor-pointer"
+            >
+              Register
+            </button>
+    
+          </section>
+
+          <section class="text-center w-full mt-4">
+            <p class="text-gray-400 text-sm">
+              Already have an account?
+              <a
+                href="index.html"
+                class="text-purple-400 hover:text-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 ml-1"
+              >
+                log in
+              </a>
+            </p>
+          </section>
+        </form>
+      </section>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>
