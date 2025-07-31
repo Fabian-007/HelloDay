@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const validUser = storedUsers.find(
       (u) => u.email === user.email && u.password === user.password
     );
-    // console.log(typeof storedUser)
-    // console.log(storedUser)
+    //console.log(typeof storedUsers)
+    //console.log(storedUsers)
 
     if (!validUser) {
       errorMsg.textContent = "invalid email or password";
@@ -103,4 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
       signUp();
     });
   }
+
+
 });

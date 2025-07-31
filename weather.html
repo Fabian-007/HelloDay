@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=123, initial-scale=1.0" />
@@ -8,23 +8,93 @@
     <script src="https://kit.fontawesome.com/1789157c63.js" crossorigin="anonymous"></script>
   </head>
   <body class="min-h-screen flex flex-col text-md">
+
     <header
-      class="p-4 text-2xl font-bold min-h-[80px] rounded-md bg-gray-800 text-white shadow-md "
+      class="p-4  min-h-[80px] rounded-md bg-gray-800 text-white shadow-md flex justify-between items-center"
     >
       <a
         href="weather.html"
-        class="relative text-purple-600 hover:text-purple-800
+        class=" text-2xl font-bold relative text-purple-600 hover:text-purple-800
   after:block after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-purple-600
   after:w-0 after:transition-all after:duration-300 hover:after:w-full"
         >HelloDay</a
       >
+     <div class="flex gap-2">
+
+      <div class=" relative w-full max-w-sm">
+        <input type="text" placeholder="Search" class=" placeholder-white w-full pl-10 pr-4 py-2  rounded-2xl focus:outline-none focus:ring-2 focus:ring-purple-500">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3"> 
+          <i class="fas fa-search  text-purple-600"></i>
+        </div>
+
+      </div>
+
+      <button id="toggleEssentials" class="text-purple-600 hover:text-purple-800 transition">
+    <i class="fa-solid fa-clipboard-list text-2xl"></i>
+  </button>
+  </div>
     </header>
-    <main class="flex-grow grid sm:grid-cols-12">
+
+    <main class="flex-1 overflow-auto grid sm:grid-cols-12">
       <aside
-        class="bg-white text-black rounded-md shadow-md sm:col-span-3 sm:block hidden"
-      ></aside>
+        id="sidebar"
+        class= "bg-white rounded-md shadow-md sm:col-span-2 sm:flex sm:flex-col hidden text-base font-semibold font-sans h-full"
+      >
+    <div class="sm:flex-grow">
+      <div class="flex justify-between items-center p-2 m-1 group cursor-pointer hover:bg-purple-100 hover:text-purple-900 hover:shadow-md transition duration-200 ease-in-out rounded-md gap-2">
+      <div class="flex items-center gap-2">
+        <i class="fa-regular fa-house text-2xl text-purple-600 group-hover:translate-x-1 transform transition-transform duration-200"></i>
+        <a href="weather.html">Home</a>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <div class="flex justify-between items-center p-2 m-1 group cursor-pointer hover:bg-purple-100 hover:text-purple-900 hover:shadow-md transition duration-200 ease-in-out rounded-md gap-2">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-book text-2xl text-purple-600 group-hover:translate-x-1 transform transition-transform duration-200"></i>
+        <a href="journal.html">Journal</a>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <div class="flex justify-between items-center p-2 m-1 group cursor-pointer hover:bg-purple-100 hover:text-purple-900 hover:shadow-md transition duration-200 ease-in-out rounded-md gap-2">
+      <div class="flex items-center gap-2">
+        <i class="fa-regular fa-clipboard text-2xl text-purple-600 group-hover:translate-x-1 transform transition-transform duration-200"></i>
+        <a href="journal.html">To-do list</a>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  
+    <div class="flex justify-between items-center p-2 m-1 group cursor-pointer hover:bg-purple-100 hover:text-purple-900 hover:shadow-md transition duration-200 ease-in-out rounded-md gap-2">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-chart-line text-2xl text-purple-600 group-hover:translate-x-1 transform transition-transform duration-200"></i>
+        <a href="journal.html">Expense Tracker</a>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+
+<div class="flex justify-between items-center p-2 m-1 group cursor-pointer hover:bg-purple-100 hover:text-purple-900 hover:shadow-md transition duration-200 ease-in-out rounded-md gap-2">
+  <div class="flex items-center gap-2">
+        <i class="fa-regular fa-lightbulb text-2xl text-purple-600 group-hover:translate-x-1 transform transition-transform duration-200"></i>
+        <a href="journal.html">Brainstorm</a>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+</div>
+
+    <div class="flex justify-between items-center p-2 m-1 mt-auto group cursor-pointer hover:bg-purple-100 hover:text-purple-900 hover:shadow-md transition duration-200 ease-in-out rounded-md gap-2"
+         id="logout">
+     <div class="flex items-center gap-2">
+        <i class="fa-solid fa-arrow-right-from-bracket text-2xl text-purple-600 group-hover:translate-x-1 transform transition-transform duration-200"></i>
+        <a href="">Log out</a>
+      </div>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    
+</aside>
+
       <article
-        class="flex flex-col bg-white text-black rounded-md shadow-md col-span-full sm:col-span-9"
+        class="flex flex-col bg-white text-black rounded-md shadow-md col-span-full sm:col-span-10"
       >
         <section class="flex-grow text-black rounded-md shadow-md flex justify-center items-center mb-5">
           <div class="p-2">
@@ -53,12 +123,32 @@
             </p>
           </div>
         </section>
-        <section class="flex-grow text-black rounded-md shadow-md"></section>
+
+
+        <section class="flex-grow text-black rounded-md shadow-md flex flex-col gap-2 p-4 w-full"
+        id="daily-essentials">
+
+        
+        <div class="flex flex-wrap gap-2 mb-3" id="essentails-display">
+
+        </div>
+
+        <div class="gap-2 w-full" id="essentials-input-group">
+          <input type="text" placeholder="type missing item" class="p-2 w-[30%]" id="essentials-input">
+          <button id="submit" class="text-white bg-purple-600 p-2 rounded-md hover:bg-purple-300 cursor-pointer">Enter</button>
+        </div>
+         
+
+        </section>
       </article>
-    </main>
+
+</main>
+
     <footer
       class="min-h-[100px] rounded-md bg-gray-800 text-white shadow-md"
     ></footer>
+
+
     <script src="weather.js"></script>
   </body>
 </html>

@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const windSpeed = document.getElementById("wind");
   const errorMsg = document.getElementById("error-message");
   const icons = document.getElementById("weather-icon" )
+  const sidebar = document.getElementById("sidebar")
+  const logOut = document.getElementById("logout")
+  const dailyEssentials = document.getElementById("daily-essentials")
+  const essentailsDisplay = document.getElementById("essentails-display")
+  const essentailsInput = document.getElementById("essentials-input")
+  const essentailsInputGroup = document.getElementById("essentials-input-group")
+  const submitBtn = document.getElementById("submit")
 
   const apiKey = "e46376b0b3e8c7063718c400db178738";
   const weatherIcons = {
@@ -84,4 +91,92 @@ document.addEventListener("DOMContentLoaded", () => {
     weatherInfo.classList.add("hidden");
     errorMsg.classList.remove("hidden");
   }
+
+  function logout(){
+   localStorage.removeItem("isLoggedIn")
+   window.location.href = "index.html"
+   
+ }
+
+ if(logOut){
+  logOut.addEventListener("click", (e)=>{
+  e.preventDefault()
+  e.stopPropagation()
+  logout()
+
+ })
+}
+
+
+const workEssentials = [
+  {id:1, name: "Phone & Charger"},
+  {id:2, name: "ID badge"},
+  {id:3, name: "Wallet or purse"},
+  {id:4, name: "Keys"},
+  {id:5, name: "Water bottle"},
+  {id:6, name: "Laptop or notebook"},
+  {id:7, name: "Transportation pass or fuel card "},
+  {id:8, name: "Lunch"},
+  {id:9, name: "Grooming items(e.g. comb, deodoranrt)"},
+  {id:10,name: "Sanitizer"},
+  {id:11,name: "Umbrella"},
+]
+
+const selectedEssential = JSON.parse(localStorage.getItem("selectedEssential"))|| []
+
+function createButton(essentialItem){
+
+  const btn = document.createElement("button")
+  btn.textContent = essentialItem.name
+  btn.setAttribute("data-id", essentialItem.id)
+  btn.classList.add(
+    "p-3", "text-md", 
+    "rounded","text-white", "bg-purple-600","hover:bg-purple-300", 
+    "hover:text-white","transition", "duration-300", "cursor-pointer"
+  )
+  essentailsDisplay.appendChild(btn)
+};
+workEssentials.forEach(createButton);
+
+dailyEssentials.addEventListener("click", (e)=>{
+
+const itemRawId = e.target.getAttribute("data-id")
+if(!itemRawId)return 
+console.log(typeof itemRawId)
+console.log(itemRawId)
+// coverts stringed id to interger
+const id = parseInt(itemRawId, 10)
+const essentialItem = workEssentials.find((ess)=> ess.id === id)
+addToSelectedEssential(essentialItem)
+})
+
+function addToSelectedEssential(essentialItem){
+ latestSelect = selectedEssential.push(essentialItem)
+ console.log("Added", essentialItem)
+ console.log("Current selected",selectedEssential)
+ saveSelectedEssential()
+}
+function saveSelectedEssential(){
+localStorage.setItem("selectedEssentials", JSON.stringify(selectedEssential))
+}
+
+
+
+submitBtn.addEventListener("click", (e)=>{
+  e.preventDefault
+ const item = essentailsInput.value.trim()
+ if(item === "") return
+ console.log(item)
+
+ const newItem = {
+  id: Date.now(),
+  name: item
+   }
+
+   workEssentials.push(newItem)
+   createButton(newItem)
+   essentailsInput.value = ""
+   
+})
+
 });
